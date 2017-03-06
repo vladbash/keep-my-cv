@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "clear": "fuser -k -n tcp 8080",
+    "start": "npm run dev",
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
