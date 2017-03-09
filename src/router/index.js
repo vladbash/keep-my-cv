@@ -1,20 +1,14 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Hello from '@/components/Hello'
-const New = resolve => require(['@/components/New.vue'], resolve)
+import Vue from 'vue';
+import Router from 'vue-router';
+const Login = resolve => require(['@/pages/auth/auth.vue'], resolve);
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Hello',
-      component: Hello
-    },
-    {
-      path: '/new',
-      component: New
+      path: '/login',
+      component: Login
     }
   ]
-})
+});

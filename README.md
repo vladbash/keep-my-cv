@@ -5,7 +5,7 @@
 ## Build Setup
 
 ``` bash
-# install dependencies
+# install dependencies 
 npm install
 
 # serve with hot reload at localhost:8080
@@ -28,3 +28,7 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+# Design concept
+
+https://dribbble.com/shots/3303127-Dribbble-Hire-me/attachments/713205

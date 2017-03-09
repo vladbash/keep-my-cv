@@ -1,15 +1,21 @@
 <template lang="pug">
   #app
-    md-toolbar
-      h1 Header
-    router-view
+    kmc-header
+    .container
+      router-view
 </template>
 
 <script>
+import Header from './components/Header';
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    'kmc-header': Header
+  }
 }
 </script>
 
-<style>
+<style lang="stylus">
+@import './styles/main.styl'
 </style>
