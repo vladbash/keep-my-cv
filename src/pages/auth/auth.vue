@@ -1,5 +1,4 @@
 <template lang="pug">
-h1 {{ auth }}
 </template>
 
 <script>

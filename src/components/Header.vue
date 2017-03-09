@@ -14,11 +14,14 @@
 </script>
 
 <style lang="stylus" scoped>
+    @import '../styles/constants.styl'
     .header
         box-shadow: 0 1px 8px 0 rgba(0,0,0,0.2)
         transition: 0.3s
-        width: 100%
-        height: 48px
+        width: calc(100% - $sidebar__width)
+        height: 54px
+        padding-left: $sidebar__width
+        background-color: white
     ul
         list-style-type: none
         margin: 0
