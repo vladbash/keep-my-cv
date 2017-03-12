@@ -5,6 +5,7 @@ import VueMaterial from 'vue-material';
 import App from './App';
 import router from './router';
 import Vuex from 'vuex';
+import 'font-awesome/css/font-awesome.min.css';
 
 Vue.config.productionTip = false;
 Vue.use(VueMaterial);
