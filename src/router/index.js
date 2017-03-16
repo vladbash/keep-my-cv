@@ -4,11 +4,19 @@ const Login = resolve => require(['@/pages/auth/auth.vue'], resolve);
 
 Vue.use(Router);
 
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/login',
-      component: Login
+      component: Login,
+      meta: {
+        auth: true
+      }
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  console.log(to, from, next)
+});
+export default router;

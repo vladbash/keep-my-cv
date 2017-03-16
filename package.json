@@ -15,8 +15,11 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "@websanova/vue-auth": "^2.8.2-beta",
+    "axios": "^0.15.3",
     "font-awesome": "^4.7.0",
     "vue": "^2.2.1",
+    "vue-axios": "^2.0.1",
     "vue-material": "^0.7.1",
     "vue-router": "^2.2.0",
     "vuex": "^2.2.1"

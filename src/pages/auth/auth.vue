@@ -1,4 +1,5 @@
 <template lang="pug">
+h1 {{auth}}
 </template>
 
 <script>
@@ -12,4 +13,4 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="stylus" scoped></style>

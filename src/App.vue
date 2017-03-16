@@ -15,6 +15,9 @@ export default {
   components: {
     'kmc-header': Header,
     'app-sidebar': Sidebar
+  },
+  data() {
+    return {};
   }
 }
 </script>

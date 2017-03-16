@@ -10,6 +10,9 @@
             li.color2
                 a
                     i.fa.fa-paper-plane-o.fa-2x(aria-hidden="true")
+            li.color3
+                a
+                    i.fa.fa-envelope-o.fa-2x(aria-hidden="true")
 </template>
     
 <script>
@@ -30,6 +33,8 @@
         color-mixin($color3)
     .color2
         color-mixin($color8)
+    .color3
+        color-mixin($color4)
     .sidebar
         min-height: 100vh
         background-color: white
@@ -44,11 +49,12 @@
         text-align: center
         display: inline
         li
-            padding: 25px
+            padding: 10px 25px
             &:nth-child(2)
-                margin-top: 32px
+                margin-top: 50px
             &:not(:first-child)
-                margin-bottom: 15px
+                margin-bottom: 30px
+                transition: all .3s ease;
             &:nth-child(1)
                 padding-top: 0
                 &:hover
