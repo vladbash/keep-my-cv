@@ -1,6 +1,6 @@
 <template lang="pug">
   #app
-    kmc-header
+    app-header
     app-sidebar
     .container
       router-view
@@ -8,16 +8,17 @@
 
 <script>
 import Header from './components/Header';
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/sidebar/Sidebar';
 
 export default {
   name: 'app',
   components: {
-    'kmc-header': Header,
+    'app-header': Header,
     'app-sidebar': Sidebar
   },
   data() {
-    return {};
+    return {
+    };
   }
 }
 </script>

@@ -2,15 +2,6 @@
 h1 {{auth}}
 </template>
 
-<script>
-export default {
-    name: 'auth',
-    data() {
-        return {
-            auth: 'Please, log in!'
-        }
-    }
-}
-</script>
+<script src="./auth.js"></script>
 
 <style lang="stylus" scoped></style>

@@ -9,11 +9,13 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueAuth from '@websanova/vue-auth';
 import 'font-awesome/css/font-awesome.min.css';
+import AsyncComputed from 'vue-async-computed';
 
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
 Vue.use(VueMaterial);
 Vue.use(Vuex);
+Vue.use(AsyncComputed);
 
 /* eslint-disable no-new */
 new Vue({

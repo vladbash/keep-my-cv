@@ -10,13 +10,13 @@ let router = new Router({
       path: '/login',
       component: Login,
       meta: {
-        auth: true
+        auth: false
       }
     }
   ]
 });
 
-router.beforeEach((to, from, next) => {
+/*router.beforeEach((to, from, next) => {
   console.log(to, from, next)
-});
+});*/
 export default router;

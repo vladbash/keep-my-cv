@@ -4,6 +4,8 @@
             .col-md-9
                 input#search-input()
             .col-md-3.right-side
+                md-avatar.md-avatar-icon
+                    img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkl2gWjNZ-jRY3IDW2MmPBtjNNA8Em9LyZl_H6Vrimxx5-hE-pdQ")
 </template>
 
 <script>
