@@ -4,7 +4,7 @@ export default {
     name: 'auth',
     data() {
         return {
-            fromState: {},
+            formState: {},
             model: {
                 login: '',
                 password: ''
@@ -14,13 +14,13 @@ export default {
     store,
     methods: {
         login() {
-            this.$store.dispatch("login", {}).then(data => {
+            this.$store.dispatch("login", this.model).then(data => {
                 data.subscribe(res => {
                     console.log(res);
                 }, err => {
                     console.log(err);
                 })
             });
-        }
+        },
     }
 }

@@ -10,7 +10,8 @@ const LOGOUT = "LOGOUT";
 
 let authStore = new Vuex.Store({
     state: {
-        isLoggedIn: !!localStorage.getItem('token')
+        isLoggedIn: !!localStorage.getItem('token'),
+        pending: false
     },
     mutations: {
         [LOGIN](state) {
@@ -30,21 +31,15 @@ let authStore = new Vuex.Store({
             return rx.Observable.create((observer) => {
                 Vue.axios.post(API_ROUTES.host + API_ROUTES.auth.login, creds)
                     .then(data => {
-                        console.log(data);
                         observer.next(data);
-                        commit(LOGIN_SUCCESS);
+                        if (data.data.token) {
+                            localStorage.setItem('token', data.data.token);
+                            commit(LOGIN_SUCCESS);
+                        }
                     })
                     .catch(error => {
-                        console.log(error);
                         observer.error(error);
                     })
-            });
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    localStorage.setItem("token", "JWT");
-                    commit(LOGIN_SUCCESS);
-                    resolve();
-                }, 1000);
             });
         },
         logout({ commit }) {
