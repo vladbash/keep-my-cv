@@ -1,14 +1,19 @@
 <template lang="pug">
   #app
-    app-header
-    app-sidebar
-    .container
-      router-view
+    .auth-app(v-if="isLoggedIn")
+      app-header
+      app-sidebar
+      .container
+        router-view
+    .non-auth-app(v-else)
+      .container
+        router-view
 </template>
 
 <script>
 import Header from './components/Header';
 import Sidebar from './components/sidebar/Sidebar';
+import storeAuth from './pages/auth/auth.store';
 
 export default {
   name: 'app',
@@ -16,9 +21,17 @@ export default {
     'app-header': Header,
     'app-sidebar': Sidebar
   },
+  store: {
+    storeAuth
+  },
   data() {
     return {
     };
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.storeAuth.getters.isLoggedIn;
+    }
   }
 }
 </script>

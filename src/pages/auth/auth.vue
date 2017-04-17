@@ -1,5 +1,7 @@
 <template lang="pug">
-h1 {{auth}}
+    div
+        vue-form(:state="formState", v-model="formState")
+        button(@click="login()") Login
 </template>
 
 <script src="./auth.js"></script>

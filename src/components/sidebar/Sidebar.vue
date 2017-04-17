@@ -5,8 +5,8 @@
                 a
                     img(src='../../assets/logo.svg')
             sidebar-item(icon="fa-address-book-o", color="#fd5c70", tooltip="Contacts")
-            sidebar-item(icon="fa-paper-plane-o", color="#fd63a3")
-            sidebar-item(icon="fa-envelope-o", color="#646ddf")
+            sidebar-item(icon="fa-paper-plane-o", color="#fd63a3", tooltip="Helper")
+            sidebar-item(icon="fa-envelope-o", color="#646ddf", tooltip="Messages")
 </template>
     
 <script>
