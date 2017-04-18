@@ -6,8 +6,7 @@
       .container
         router-view
     .non-auth-app(v-else)
-      .container
-        router-view
+      router-view
 </template>
 
 <script>

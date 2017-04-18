@@ -17,6 +17,7 @@
   "dependencies": {
     "@websanova/vue-auth": "^2.8.2-beta",
     "axios": "^0.15.3",
+    "base64-img": "^1.0.3",
     "font-awesome": "^4.7.0",
     "rxjs": "^5.3.0",
     "vue": "^2.2.1",
