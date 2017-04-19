@@ -24,6 +24,9 @@ export default {
             signUpFlag: false
         }
     },
+    computed: {
+        currentYear: () => new Date().getFullYear()
+    },
     store,
     methods: {
         login() {

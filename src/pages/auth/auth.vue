@@ -49,11 +49,22 @@
                         .d-flex.justify-content-between
                             md-button.md-raised(@click.native="signUp()") Sign up
                             md-button.md-dense(@click.native="signUpFlag = false") Log in
+            
+            .footer
+                span &copy; ReqrUtka CRM, Created at {{ currentYear }}
 </template>
 
 <script src="./auth.js"></script>
 
 <style lang="stylus" scoped>
+    .footer
+        position: fixed
+        right: 0
+        bottom: 0
+        left: 0
+        padding: 1rem
+        text-align: center
+    
     .main-block
         display: table
         height: 100vh
@@ -68,7 +79,7 @@
     .card-customization
         width: 50%
         margin-top: 3%
-        opacity: 0.94
+        opacity: 0.9
     
     .required-field
         label::after
