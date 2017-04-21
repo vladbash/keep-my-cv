@@ -46,7 +46,7 @@
                                     div(slot='required') Password is a required
                             .col-md-6
                                 input.form-control(type='password', name='repeatedPassword', placeholder="Repeated password", required, v-model='signupModel.repeatedPassword')
-                                field-messages.form-control-feedback(name='password', show='$touched || $submitted')
+                                field-messages.form-control-feedback(name='repeatedPassword', show='$touched || $submitted')
                                     div(slot='required') Password is a required
                         .d-flex.justify-content-between
                             md-button.md-raised(@click.native="signUp()") Sign up
