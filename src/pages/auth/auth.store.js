@@ -16,7 +16,10 @@ let authStore = new Vuex.Store({
         pending: false
     },
     mutations: {
-        [LOGIN, SIGNUP](state) {
+        [LOGIN](state) {
+            state.pending = true;
+        },
+        [SIGNUP](state) {
             state.pending = true;
         },
         [LOGIN_SUCCESS](state) {
