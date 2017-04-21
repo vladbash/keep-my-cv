@@ -7,6 +7,8 @@ import { API_ROUTES } from '../../config/api.routes';
 const LOGIN = "LOGIN";
 const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 const LOGOUT = "LOGOUT";
+const SIGNUP = "SIGNUP";
+const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 
 let authStore = new Vuex.Store({
     state: {
@@ -14,11 +16,14 @@ let authStore = new Vuex.Store({
         pending: false
     },
     mutations: {
-        [LOGIN](state) {
+        [LOGIN, SIGNUP](state) {
             state.pending = true;
         },
         [LOGIN_SUCCESS](state) {
             state.isLoggedIn = true;
+            state.pending = false;
+        },
+        [SIGNUP_SUCCESS](state) {
             state.pending = false;
         },
         [LOGOUT](state) {
@@ -28,7 +33,7 @@ let authStore = new Vuex.Store({
     actions: {
         login({ commit }, creds) {
             commit(LOGIN); // show spinner
-            return rx.Observable.create((observer) => {
+            return rx.Observable.create(observer => {
                 Vue.axios.post(API_ROUTES.host + API_ROUTES.auth.login, creds)
                     .then(data => {
                         observer.next(data);
@@ -36,15 +41,33 @@ let authStore = new Vuex.Store({
                             localStorage.setItem('token', data.data.token);
                             commit(LOGIN_SUCCESS);
                         }
+                        observer.completed();
                     })
                     .catch(error => {
                         observer.error(error);
                     })
             });
         },
+        signup({ commit }, userData) {
+            commit(SIGNUP);
+            return rx.Observable.create(observer => {
+                Vue.axios.post(API_ROUTES.host + API_ROUTES.auth.signUp, userData)
+                    .then(data => {
+                        observer.next(data);
+                        commit(SIGNUP_SUCCESS);
+                        observer.completed();
+                    })
+                    .catch(error => {
+                        observer.error(error);
+                    })
+            })
+        },
         logout({ commit }) {
-            localStorage.removeItem("token");
-            commit(LOGOUT);
+            return rx.Observable.create(observer => {
+                localStorage.removeItem("token");
+                commit(LOGOUT);
+                observer.complete();
+            });
         }
     },
     getters: {

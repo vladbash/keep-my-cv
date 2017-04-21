@@ -20,7 +20,8 @@ Vue.use(VueMaterial);
 Vue.use(AsyncComputed);
 Vue.use(VueForm, {
   inputClasses: {
-    invalid: 'md-input-invalid'
+    invalid: 'has-danger',
+    valid: 'has-success'
   }
 })
 

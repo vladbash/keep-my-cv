@@ -17,16 +17,30 @@
                             //-arrow_drop_down_circle
                             md-menu-content
                                 md-menu-item Ducky's profile
-                                md-menu-item Fly away
+                                md-menu-item(@click.native="logout") Fly away
 </template>
 
 <script>
     import AppSearch from './search-input/SearchInput.vue';
+    import authStore from '../pages/auth/auth.store';
 
     export default {
         name: 'kmc-header',
+        store: {
+            authStore
+        },
         components: {
             'app-search': AppSearch
+        },
+        methods: {
+            logout() {
+                this.$store.authStore.dispatch('logout')
+                .then(data => {
+                    data.subscribe(() => {
+                        this.router.go('/login');
+                    });
+                });
+            }
         }
     }
 </script>
