@@ -1,5 +1,7 @@
 <template lang="pug">
 form(@submit.stop.prevent="submit")
+    .alert.alert-danger.alert-material(v-if="invalidCreds", role="alert")
+        span.md-error Incorrect login or password
     .row
         .col-md-6
             md-input-container(:class="{'md-input-invalid': errors.has('email')}")

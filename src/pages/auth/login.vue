@@ -1,14 +1,14 @@
 <template lang="pug">
 form(@submit.prevent="logIn")
-    div(v-if="invalidCreds")
+    .alert.alert-danger.alert-material(v-if="invalidCreds", role="alert")
         span.md-error Incorrect login or password
     md-input-container(:class="{'md-input-invalid': errors.has('login')}")
         label Email
-        md-input(type="email", name="login", v-model="login", v-validate="'required|email'")
+        md-input(type="email", name="login", v-model="login", v-validate="'required|email'", required)
         span.md-error {{errors.first('login')}}
     md-input-container(:class="{'md-input-invalid': errors.has('password')}")
         label Password
-        md-input(type="password", name="password", v-model="password", v-validate="'required'")
+        md-input(type="password", name="password", v-model="password", v-validate="'required'", required)
         span.md-error {{errors.first('password')}}
     .submit-block
         md-button.md-raised.md-primary.submit(type="submit") Log in
@@ -37,20 +37,17 @@ form(@submit.prevent="logIn")
         },
         methods: {
             logIn() {
-                this.$validator.validateAll().then(() => {
+                this.validator.validateAll().then(() => {
                     this.$store.dispatch("login", {
                         login: this.login,
                         password: this.password
                     }).then(data => {
                         data.subscribe(res => {
                             this.invalidCreds = false;
-                            console.log(res);
                         }, err => {
                             this.invalidCreds = true;
                         })
                     });
-                }).catch((res) => {
-                    console.log(res, this.validator.errorBag);
                 });
                 
             },
