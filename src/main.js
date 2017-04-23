@@ -12,18 +12,14 @@ import VueAxios from 'vue-axios';
 import VueAuth from '@websanova/vue-auth';
 import 'font-awesome/css/font-awesome.min.css';
 import AsyncComputed from 'vue-async-computed';
-import VueForm from 'vue-form';
+import VeeValidate from 'vee-validate';
+
 
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
 Vue.use(VueMaterial);
 Vue.use(AsyncComputed);
-Vue.use(VueForm, {
-  inputClasses: {
-    invalid: 'has-danger',
-    valid: 'has-success'
-  }
-})
+Vue.use(VeeValidate)
 
 /* eslint-disable no-new */
 new Vue({
