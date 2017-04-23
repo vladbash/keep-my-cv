@@ -6,38 +6,39 @@ form(@submit.stop.prevent="submit")
         .col-md-6
             md-input-container(:class="{'md-input-invalid': errors.has('email')}")
                 label Email
-                md-input(type="text", name="email", v-model="model.email", v-validate="'required|email'")
+                md-input(type="text", name="email", v-model="email", v-validate="'required|email'", required)
                 span.md-error {{errors.first('email')}}
         .col-md-6
-            md-input-container(:class="{'md-input-invalid': errors.has('company')}")
+            md-input-container
                 label Company
-                md-input(type="text", name="company", v-model="model.company", v-validate="'required'")
-                span.md-error {{errors.first('company')}}
+                md-input(type="text", name="company", v-model="company")
     .row
         .col-md-6
             md-input-container(:class="{'md-input-invalid': errors.has('name')}")
                 label Name
-                md-input(type="text", name="name", v-model="model.name", v-validate="'required'")
+                md-input(type="text", name="name", v-model="name", v-validate="'required'", required)
                 span.md-error {{errors.first('email')}}
         .col-md-6
-            md-input-container(:class="{'md-input-invalid': errors.has('Surname')}")
+            md-input-container
                 label Surname
-                md-input(type="text", name="surname", v-model="model.surname", v-validate="'required'")
-                span.md-error {{errors.first('surname')}}
+                md-input(type="text", name="surname", v-model="surname")
     .row
         .col-md-6
             md-input-container(:class="{'md-input-invalid': errors.has('password')}")
                 label Password
-                md-input(type="password", name="password", v-model="model.password", v-validate="'required'")
+                md-input(type="password", name="password", v-model="password", v-validate="'required'", required)
                 span.md-error {{errors.first('password')}}
         .col-md-6
             md-input-container(:class="{'md-input-invalid': errors.has('passwordRepeat')}")
                 label Repeated password
-                md-input(type="password", name="passwordRepeat", v-model="model.repeatedPassword", v-validate="'required'")
+                md-input(type="password", name="passwordRepeat", v-model="repeatedPassword", v-validate="'required'", required)
                 span.md-error {{errors.first('passwordRepeat')}}
+    .submit-block
+        md-button.md-raised.md-primary.submit(type="submit") Sign up
 </template>
 
 <script>
+    import { Validator } from 'vee-validate';
     import store from './auth.store';
 
     export default {
@@ -49,10 +50,33 @@ form(@submit.stop.prevent="submit")
                 company: '',
                 surname: '',
                 password: '',
-                repeatedPassword: ''
+                repeatedPassword: '',
+                invalidCreds: false
             };
         },
-        store
+        store,
+         watch: {
+            email(value) {
+                this.validator.validate('email', value);
+            },
+            name(value) {
+                this.validator.validate('name', value);
+            },
+            password(value) {
+                this.validator.validate('password', value);
+            }
+        },
+        methods: {
+            signup() {}
+        },
+        created() {
+            this.validator = new Validator({
+                email: 'required|email',
+                name: 'required',
+                password: 'required'
+            });
+            this.$set(this, 'errors', this.validator.errorBag);
+        }
     }
 </script>
 
