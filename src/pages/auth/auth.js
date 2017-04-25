@@ -1,7 +1,8 @@
 import { API_ROUTES } from '../../config/api.routes';
 import Vue from 'vue';
-import Login from './login';
-import SignUp from './signup';
+import Login from './child-components/login';
+import SignUp from './child-components/signup';
+import RemindPassword from './child-components/remind';
 import store from './auth.store';
 import { Observer } from 'rxjs';
 
@@ -11,6 +12,9 @@ export default {
         return {
             background: '',
             signUpFlag: false,
+            remindFlag: false,
+            remindError: null,
+            remindSuccess: null,
             signupError: null,
             signupSuccess: null,
             loginError: null
@@ -19,7 +23,8 @@ export default {
     store,
     components: {
         'app-login': Login,
-        'app-signup': SignUp
+        'app-signup': SignUp,
+        'app-remind': RemindPassword
     },
     methods: {
         signup(user) {
@@ -27,8 +32,8 @@ export default {
                 .then((data) => {
                     data.subscribe(response => {
                         this.signupSuccess = response.data.message;
+                        this.signupError = null;
                     }, error => {
-                        console.log(error);
                         this.signupSuccess = null;
                         this.signupError = error.data.error;
                     })
@@ -40,6 +45,17 @@ export default {
                         this.loginError = null;
                     }, err => {
                         this.loginError = err.data.error;
+                    });
+                });
+        },
+        remindPassword(email) {
+            this.$store.dispatch("remind", { email }).then(data => {
+                    data.subscribe(res => {
+                        this.remindSuccess = res.data.message;
+                        this.remindError = null;
+                    }, err => {
+                        this.remindSuccess = null;
+                        this.remindError = err.data.error;
                     });
                 });
         },

@@ -9,6 +9,8 @@ const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 const LOGOUT = "LOGOUT";
 const SIGNUP = "SIGNUP";
 const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
+const REMIND = "REMIND";
+const REMIND_SUCCESS = "REMIND_SUCCESS";
 
 let authStore = new Vuex.Store({
     state: {
@@ -22,11 +24,17 @@ let authStore = new Vuex.Store({
         [SIGNUP](state) {
             state.pending = true;
         },
+        [REMIND](state) {
+            state.pending = true;
+        },
         [LOGIN_SUCCESS](state) {
             state.isLoggedIn = true;
             state.pending = false;
         },
         [SIGNUP_SUCCESS](state) {
+            state.pending = false;
+        },
+        [REMIND_SUCCESS](state) {
             state.pending = false;
         },
         [LOGOUT](state) {
@@ -58,6 +66,20 @@ let authStore = new Vuex.Store({
                     .then(data => {
                         observer.next(data);
                         commit(SIGNUP_SUCCESS);
+                        observer.complete();
+                    })
+                    .catch(error => {
+                        observer.error(error.response);
+                    })
+            })
+        },
+        remind({ commit }, email) {
+            commit(REMIND);
+            return rx.Observable.create(observer => {
+                Vue.axios.post(API_ROUTES.host + API_ROUTES.auth.remind, email)
+                    .then(data => {
+                        observer.next(data);
+                        commit(REMIND_SUCCESS);
                         observer.complete();
                     })
                     .catch(error => {
