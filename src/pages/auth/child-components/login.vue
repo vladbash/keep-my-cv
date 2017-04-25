@@ -1,7 +1,6 @@
 <template lang="pug">
 form(@submit.prevent="logIn")
-    .alert.alert-danger.alert-material(v-if="errorMessage", role="alert")
-        span.md-error {{ errorMessage }}
+    alert(:error="errorMessage")
     md-input-container(:class="{'md-input-invalid': errors.has('login')}")
         label Email
         md-input(type="email", name="login", v-model="login", v-validate="'required|email'", required)
@@ -16,9 +15,13 @@ form(@submit.prevent="logIn")
 
 <script>
     import { Validator } from 'vee-validate';
+    import FormAlert from '../../../components/FormAlert';
 
     export default {
         name: 'login',
+        components: {
+            'alert': FormAlert
+        },
         data: () => ({
             login: '',
             password: '',

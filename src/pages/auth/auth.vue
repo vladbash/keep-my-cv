@@ -9,7 +9,7 @@
                         app-login(v-if="!signUpFlag && !remindFlag", :error-message="loginError", :login-event="login")
                         app-signup(v-if="signUpFlag && !remindFlag", :error-message="signupError", :success-message="signupSuccess", v-on:signup="signup")
                         .d-flex(:class="{'justify-content-between': !signUpFlag, 'justify-content-end': signUpFlag}")
-                            md-button.md-dense(v-if="!signUpFlag", @click.native="remindFlag = !remindFlag") {{ remindFlag ? 'Back' : 'Fogot password?' }}
+                            md-button.md-dense(v-if="!signUpFlag", @click.native="goToRemind()") {{ remindFlag ? 'Back' : 'Fogot password?' }}
                             md-button.md-dense(@click.native="changeForm()", v-if="!remindFlag") {{ !signUpFlag ? 'Sign up' : 'Log in' }}
             
             .footer

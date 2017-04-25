@@ -1,9 +1,6 @@
 <template lang="pug">
 form(@submit.prevent="remind")
-    .alert.alert-danger.alert-material(v-if="errorMessage", role="alert")
-        span.md-error {{ errorMessage }}
-    .alert.alert-success.alert-material(v-if="successMessage", role="alert")
-        span.md-error {{ successMessage }}
+    alert(:error="errorMessage", :success="successMessage")
     md-input-container(:class="{'md-input-invalid': errors.has('email')}")
         label Email
         md-input(type="email", name="email", v-model="email", v-validate="'required|email'", required)
@@ -14,9 +11,13 @@ form(@submit.prevent="remind")
 
 <script>
     import { Validator } from 'vee-validate';
+    import FormAlert from '../../../components/FormAlert';
 
     export default {
         name: 'remind',
+        components: {
+            'alert': FormAlert
+        },
         data: () => {
             return {
                 email: '',

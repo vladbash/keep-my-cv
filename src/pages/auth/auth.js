@@ -64,6 +64,12 @@ export default {
             this.signupError = null;
             this.signupSuccess = null;
             this.signUpFlag = !this.signUpFlag;
+        },
+        goToRemind() {
+            this.loginError = null;
+            this.remindError = null;
+            this.remindSuccess = null;
+            this.remindFlag = !this.remindFlag;
         }
     },
     computed: {
