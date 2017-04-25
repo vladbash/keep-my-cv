@@ -1,5 +1,5 @@
 <template lang="pug">
-form(@submit.stop.prevent="submit")
+form(@submit.prevent="signup")
     .alert.alert-danger.alert-material(v-if="invalidCreds", role="alert")
         span.md-error Incorrect login or password
     .row
@@ -17,7 +17,7 @@ form(@submit.stop.prevent="submit")
             md-input-container(:class="{'md-input-invalid': errors.has('name')}")
                 label Name
                 md-input(type="text", name="name", v-model="name", v-validate="'required'", required)
-                span.md-error {{errors.first('email')}}
+                span.md-error {{errors.first('name')}}
         .col-md-6
             md-input-container
                 label Surname
@@ -29,12 +29,12 @@ form(@submit.stop.prevent="submit")
                 md-input(type="password", name="password", v-model="password", v-validate="'required'", required)
                 span.md-error {{errors.first('password')}}
         .col-md-6
-            md-input-container(:class="{'md-input-invalid': errors.has('passwordRepeat')}")
+            md-input-container(:class="{'md-input-invalid': errors.has('repeated')}")
                 label Repeated password
-                md-input(type="password", name="passwordRepeat", v-model="repeatedPassword", v-validate="'required'", required)
-                span.md-error {{errors.first('passwordRepeat')}}
+                md-input(type="password", name="repeated" v-model="repeated", v-validate="'required|confirmed:password'", required)
+                span.md-error {{errors.first('repeated')}}
     .submit-block
-        md-button.md-raised.md-primary.submit(type="submit") Sign up
+        md-button.md-raised.md-primary.submit(type="submit", :disabled="errors['errors'].length > 0") Sign up
 </template>
 
 <script>
@@ -50,8 +50,9 @@ form(@submit.stop.prevent="submit")
                 company: '',
                 surname: '',
                 password: '',
-                repeatedPassword: '',
-                invalidCreds: false
+                repeated: '',
+                invalidCreds: false,
+                errors: null
             };
         },
         store,
@@ -64,16 +65,30 @@ form(@submit.stop.prevent="submit")
             },
             password(value) {
                 this.validator.validate('password', value);
+            },
+            repeated(value) {
+                this.validator.validate('repeated', value);
             }
         },
         methods: {
-            signup() {}
+            signup() {
+                this.validator.validateAll()
+                    .then(() => {
+                        this.$store.dispatch('signup', {
+                            
+                        })
+                    })
+                    .catch((errors) => {
+                        console.log(errors);
+                    });
+            }
         },
         created() {
             this.validator = new Validator({
                 email: 'required|email',
                 name: 'required',
-                password: 'required'
+                password: 'required',
+                repeated: 'required|confirmed:password'
             });
             this.$set(this, 'errors', this.validator.errorBag);
         }
