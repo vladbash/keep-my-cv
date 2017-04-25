@@ -1,7 +1,9 @@
 <template lang="pug">
 form(@submit.prevent="signup")
-    .alert.alert-danger.alert-material(v-if="invalidCreds", role="alert")
-        span.md-error Incorrect login or password
+    .alert.alert-danger.alert-material(v-if="errorMessage", role="alert")
+        span.md-error {{ errorMessage }}
+    .alert.alert-success.alert-material(v-if="successMessage", role="alert")
+        span.md-error {{ successMessage }}
     .row
         .col-md-6
             md-input-container(:class="{'md-input-invalid': errors.has('email')}")
@@ -39,10 +41,10 @@ form(@submit.prevent="signup")
 
 <script>
     import { Validator } from 'vee-validate';
-    import store from './auth.store';
 
     export default {
         name: 'sign-up',
+        props: ['errorMessage', 'successMessage'],
         data: () => {
             return {
                 email: '',
@@ -51,12 +53,10 @@ form(@submit.prevent="signup")
                 surname: '',
                 password: '',
                 repeated: '',
-                invalidCreds: false,
                 errors: null
             };
         },
-        store,
-         watch: {
+        watch: {
             email(value) {
                 this.validator.validate('email', value);
             },
@@ -74,9 +74,13 @@ form(@submit.prevent="signup")
             signup() {
                 this.validator.validateAll()
                     .then(() => {
-                        this.$store.dispatch('signup', {
-                            
-                        })
+                        this.$emit('signup', {
+                            email: this.email,
+                            name: this.name,
+                            company: this.company,
+                            surname: this.surname,
+                            password: this.password
+                        });
                     })
                     .catch((errors) => {
                         console.log(errors);

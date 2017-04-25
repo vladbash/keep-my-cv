@@ -5,11 +5,11 @@
                 div
                     img(src='../../assets/logo.svg').central-block
                 md-card-content
-                        app-login(v-if="!signUpFlag")
-                        app-signup(v-if="signUpFlag")
+                        app-login(v-if="!signUpFlag", :error-message="loginError", :login-event="login")
+                        app-signup(v-if="signUpFlag", :error-message="signupError", :success-message="signupSuccess", v-on:signup="signup")
                         .d-flex(:class="{'justify-content-between': !signUpFlag, 'justify-content-end': signUpFlag}")
                             md-button.md-dense(v-if="!signUpFlag") Fogot password?
-                            md-button.md-dense(@click.native="signUpFlag = !signUpFlag") {{ !signUpFlag ? 'Sign up' : 'Log in' }}
+                            md-button.md-dense(@click.native="changeForm()") {{ !signUpFlag ? 'Sign up' : 'Log in' }}
             
             .footer
                 span &copy; ReqrUtka CRM, Created at {{ currentYear }}

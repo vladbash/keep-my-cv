@@ -1,7 +1,7 @@
 <template lang="pug">
 form(@submit.prevent="logIn")
-    .alert.alert-danger.alert-material(v-if="invalidCreds", role="alert")
-        span.md-error Incorrect login or password
+    .alert.alert-danger.alert-material(v-if="errorMessage", role="alert")
+        span.md-error {{ errorMessage }}
     md-input-container(:class="{'md-input-invalid': errors.has('login')}")
         label Email
         md-input(type="email", name="login", v-model="login", v-validate="'required|email'", required)
@@ -16,17 +16,15 @@ form(@submit.prevent="logIn")
 
 <script>
     import { Validator } from 'vee-validate';
-    import store from './auth.store';
 
     export default {
         name: 'login',
         data: () => ({
             login: '',
             password: '',
-            errors: null,
-            invalidCreds: false
+            errors: null
         }),
-        store,
+        props: ['loginEvent', 'errorMessage'],
         watch: {
             login(value) {
                 this.validator.validate('login', value);
@@ -38,15 +36,9 @@ form(@submit.prevent="logIn")
         methods: {
             logIn() {
                 this.validator.validateAll().then(() => {
-                    this.$store.dispatch("login", {
+                    this.loginEvent({
                         login: this.login,
                         password: this.password
-                    }).then(data => {
-                        data.subscribe(res => {
-                            this.invalidCreds = false;
-                        }, err => {
-                            this.invalidCreds = true;
-                        })
                     });
                 });
                 

@@ -3,6 +3,6 @@ export const API_ROUTES = {
     randomImage: 'https://source.unsplash.com/1600x900/?nature,water',
     auth: {
         login: 'login',
-        signUp: 'registaration'
+        signUp: 'registration'
     }
 }

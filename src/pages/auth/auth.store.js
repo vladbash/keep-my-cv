@@ -36,7 +36,7 @@ let authStore = new Vuex.Store({
     actions: {
         login({ commit }, creds) {
             commit(LOGIN); // show spinner
-            return rx.Observable.create(observer => {
+            return rx.Observable.create((observer) => {
                 Vue.axios.post(API_ROUTES.host + API_ROUTES.auth.login, creds)
                     .then(data => {
                         observer.next(data);
@@ -44,11 +44,11 @@ let authStore = new Vuex.Store({
                             localStorage.setItem('token', data.data.token);
                             commit(LOGIN_SUCCESS);
                         }
-                        observer.completed();
+                        observer.complete();
                     })
                     .catch(error => {
-                        observer.error(error);
-                    })
+                        observer.error(error.response);
+                    });
             });
         },
         signup({ commit }, userData) {
@@ -58,10 +58,10 @@ let authStore = new Vuex.Store({
                     .then(data => {
                         observer.next(data);
                         commit(SIGNUP_SUCCESS);
-                        observer.completed();
+                        observer.complete();
                     })
                     .catch(error => {
-                        observer.error(error);
+                        observer.error(error.response);
                     })
             })
         },
