@@ -37,7 +37,7 @@
                 this.$store.authStore.dispatch('logout')
                 .then(data => {
                     data.subscribe(() => {
-                        this.router.go('/login');
+                        this.$router.push('login');
                     });
                 });
             }

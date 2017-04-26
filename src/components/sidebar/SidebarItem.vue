@@ -1,7 +1,8 @@
 <template lang="pug">
     li.item(:style="{ color: color, borderLeftColor: color }")
         //md-icon.md-size-2x(:style="{ color: color }", v-bind:md-iconset="'fa ' + icon ")
-        i.fa.fa-3x(aria-hidden="true", :class="[icon]", :style="{ color: color }")
+        router-link(:to="link")
+            i.fa.fa-3x(aria-hidden="true", :class="[icon]", :style="{ color: color }")
         md-tooltip(md-direction="bottom", v-if="tooltip") {{ tooltip }}
 </template>
 
@@ -11,6 +12,7 @@
         props: {
             icon: String,
             color: String,
+            link: String,
             tooltip: {
                 type: String,
                 required: false

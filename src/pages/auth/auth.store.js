@@ -47,11 +47,11 @@ let authStore = new Vuex.Store({
             return rx.Observable.create((observer) => {
                 Vue.axios.post(API_ROUTES.host + API_ROUTES.auth.login, creds)
                     .then(data => {
-                        observer.next(data);
                         if (data.data.token) {
                             localStorage.setItem('token', data.data.token);
                             commit(LOGIN_SUCCESS);
                         }
+                        observer.next(data);
                         observer.complete();
                     })
                     .catch(error => {
@@ -64,8 +64,8 @@ let authStore = new Vuex.Store({
             return rx.Observable.create(observer => {
                 Vue.axios.post(API_ROUTES.host + API_ROUTES.auth.signUp, userData)
                     .then(data => {
-                        observer.next(data);
                         commit(SIGNUP_SUCCESS);
+                        observer.next(data);
                         observer.complete();
                     })
                     .catch(error => {
@@ -78,8 +78,8 @@ let authStore = new Vuex.Store({
             return rx.Observable.create(observer => {
                 Vue.axios.post(API_ROUTES.host + API_ROUTES.auth.remind, email)
                     .then(data => {
-                        observer.next(data);
                         commit(REMIND_SUCCESS);
+                        observer.next(data);
                         observer.complete();
                     })
                     .catch(error => {
@@ -91,6 +91,7 @@ let authStore = new Vuex.Store({
             return rx.Observable.create(observer => {
                 localStorage.removeItem("token");
                 commit(LOGOUT);
+                observer.next();
                 observer.complete();
             });
         }

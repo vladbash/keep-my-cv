@@ -2,11 +2,15 @@
     .sidebar
         ul.menu
             li
-                a
+                router-link(:to="logoLink")
                     img(src='../../assets/logo.svg')
-            sidebar-item(icon="fa-address-book-o", color="#fd5c70", tooltip="Contacts")
-            sidebar-item(icon="fa-paper-plane-o", color="#fd63a3", tooltip="Helper")
-            sidebar-item(icon="fa-envelope-o", color="#646ddf", tooltip="Messages")
+            sidebar-item(
+                v-for="item in sidebarItems",
+                :key="item",
+                :link="item.link",
+                :icon="item.icon", 
+                :color="item.color", 
+                :tooltip="item.tooltip")
 </template>
     
 <script>
@@ -14,6 +18,10 @@
 
     export default {
         name: 'app-sidebar',
+        props: [
+            'sidebarItems',
+            'logoLink'
+            ],
         components: {
             'sidebar-item': SidebarItem
         }
@@ -37,7 +45,7 @@
         text-align: center
         display: inline
         li
-            padding: 10px 25px
+            padding: 10px 15px
             &:nth-child(2)
                 margin-top: 50px
             &:not(:first-child)
@@ -47,7 +55,7 @@
                 padding-top: 0
                 &:hover
                     box-shadow: none
-                a
+                router-link
                     img
                         width: 72px
                         margin: -30px

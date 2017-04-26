@@ -2,7 +2,7 @@
   #app
     .auth-app(v-if="isLoggedIn")
       app-header
-      app-sidebar
+      app-sidebar(:sidebar-items="sidebarItems", :logo-link="logoLink")
       .container
         router-view
     .non-auth-app(v-else)
@@ -25,6 +25,27 @@ export default {
   },
   data() {
     return {
+      sidebarItems: [
+        {
+          icon: 'fa-address-book-o',
+          color: '#fd5c70',
+          tooltip: 'Contacts',
+          link: '/dashboard'
+        },
+        {
+          icon: 'fa-paper-plane-o',
+          color: '#fd63a3',
+          tooltip: 'Helper',
+          link: '/dashboard'
+        },
+        {
+          icon: 'fa-envelope-o',
+          color: '#646ddf',
+          tooltip: 'Messages',
+          link: '/dashboard'
+        }
+      ],
+      logoLink: '/dashboard'
     };
   },
   computed: {

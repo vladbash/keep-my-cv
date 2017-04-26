@@ -43,6 +43,7 @@ export default {
             this.$store.dispatch("login", user).then(data => {
                     data.subscribe(res => {
                         this.loginError = null;
+                        this.$router.push('dashboard');
                     }, err => {
                         this.loginError = err.data.error;
                     });
