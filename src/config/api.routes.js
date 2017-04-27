@@ -5,5 +5,10 @@ export const API_ROUTES = {
         login: 'login',
         signUp: 'registration',
         remind: 'remind'
+    },
+    profile: {
+        get: 'profile',
+        update: 'profile',
+        delete: 'profile'
     }
 }

@@ -27,5 +27,9 @@ new Vue({
   template: '<App/>',
   components: {
     App
+  },
+  created() {
+    if (localStorage.getItem('token'))
+      Vue.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
   }
 }).$mount('#app');

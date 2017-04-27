@@ -10,11 +10,10 @@
                     .profile-bage
                         md-avatar.md-avatar-icon
                             img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkl2gWjNZ-jRY3IDW2MmPBtjNNA8Em9LyZl_H6Vrimxx5-hE-pdQ")
-                        span.personal-name Ducky Ducks Test Test
+                        span.personal-name {{ profile ? `${profile.name} ${profile.surname}` : '' }}
                     .personal-menu
                         md-menu(md-direction="bottom left")
                             md-icon(md-menu-trigger) expand_more
-                            //-arrow_drop_down_circle
                             md-menu-content
                                 md-menu-item(v-for="item in menuItems", :key="item", @click.native="item.action")
                                     md-icon(v-if="item.icon") {{ item.icon }}
@@ -27,7 +26,8 @@
     export default {
         name: 'kmc-header',
         props: [
-            'menuItems'
+            'menuItems',
+            'profile'
         ],
         components: {
             'app-search': AppSearch

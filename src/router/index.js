@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import authStore from '../pages/auth/auth.store';
 const Login = resolve => require(['@/pages/auth/auth.vue'], resolve);
 const Dashboard = resolve => require(['@/pages/dashboard/Dashboard.vue'], resolve);
+//const Profile = resolve => require(['@/pages/profile/Profile.vue'], resolve);
 
 Vue.use(Router);
 

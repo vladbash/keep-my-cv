@@ -1,7 +1,7 @@
 <template lang="pug">
   #app
     .auth-app(v-if="isLoggedIn")
-      app-header(:menu-items="menuItems")
+      app-header(:menu-items="menuItems", :profile="profile")
       app-sidebar(:sidebar-items="sidebarItems", :logo-link="logoLink")
       .container
         router-view
@@ -12,7 +12,8 @@
 <script>
 import Header from './components/Header';
 import Sidebar from './components/sidebar/Sidebar';
-import storeAuth from './pages/auth/auth.store';
+import authStore from './pages/auth/auth.store';
+import profileStore from './pages/profile/profile.store';
 
 export default {
   name: 'app',
@@ -21,7 +22,8 @@ export default {
     'app-sidebar': Sidebar
   },
   store: {
-    storeAuth
+    authStore,
+    profileStore
   },
   data() {
     return {
@@ -35,7 +37,7 @@ export default {
           icon: 'exit_to_app',
           label: 'Fly away',
           action: () => {
-            this.$store.storeAuth.dispatch('logout')
+            this.$store.authStore.dispatch('logout')
                 .then(data => {
                     data.subscribe(() => {
                         this.$router.push('login');
@@ -69,8 +71,17 @@ export default {
   },
   computed: {
     isLoggedIn() {
-      return this.$store.storeAuth.getters.isLoggedIn;
+      return this.$store.authStore.getters.isLoggedIn;
+    },
+    profile() {
+      return this.$store.profileStore.getters.profile;
     }
+  },
+  created () {
+      this.$store.profileStore.dispatch('get')
+        .then(data => {
+          data.subscribe();
+        });
   }
 }
 </script>

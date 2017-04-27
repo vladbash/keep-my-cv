@@ -49,6 +49,7 @@ let authStore = new Vuex.Store({
                     .then(data => {
                         if (data.data.token) {
                             localStorage.setItem('token', data.data.token);
+                            Vue.axios.defaults.headers.common['Authorization'] = data.data.token;
                             commit(LOGIN_SUCCESS);
                         }
                         observer.next(data);
@@ -91,6 +92,7 @@ let authStore = new Vuex.Store({
             return rx.Observable.create(observer => {
                 localStorage.removeItem("token");
                 commit(LOGOUT);
+                delete Vue.axios.defaults.headers.common['Authorization'];
                 observer.next();
                 observer.complete();
             });
