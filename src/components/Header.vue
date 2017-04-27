@@ -16,31 +16,21 @@
                             md-icon(md-menu-trigger) expand_more
                             //-arrow_drop_down_circle
                             md-menu-content
-                                md-menu-item Ducky's profile
-                                md-menu-item(@click.native="logout") Fly away
+                                md-menu-item(v-for="item in menuItems", :key="item", @click.native="item.action")
+                                    md-icon(v-if="item.icon") {{ item.icon }}
+                                    span {{ item.label }}
 </template>
 
 <script>
     import AppSearch from './search-input/SearchInput.vue';
-    import authStore from '../pages/auth/auth.store';
 
     export default {
         name: 'kmc-header',
-        store: {
-            authStore
-        },
+        props: [
+            'menuItems'
+        ],
         components: {
             'app-search': AppSearch
-        },
-        methods: {
-            logout() {
-                this.$store.authStore.dispatch('logout')
-                .then(data => {
-                    data.subscribe(() => {
-                        this.$router.push('login');
-                    });
-                });
-            }
         }
     }
 </script>

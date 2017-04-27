@@ -17,6 +17,7 @@ let router = new Router({
     },
     {
       path: '/dashboard',
+      alias: '/',
       component: Dashboard,
       meta: {
         auth: true
@@ -29,7 +30,7 @@ router.beforeEach((to, from, next) => {
   if(to.meta.auth === authStore.getters.isLoggedIn) {
     next();
   } else {
-    next({ path: authStore.getters.isLoggedIn ? '/dashboard' : '/login' });
+    next({ path: authStore.getters.isLoggedIn ? '/' : '/login' });
   }
 });
 export default router;

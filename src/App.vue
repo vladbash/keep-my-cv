@@ -1,7 +1,7 @@
 <template lang="pug">
   #app
     .auth-app(v-if="isLoggedIn")
-      app-header
+      app-header(:menu-items="menuItems")
       app-sidebar(:sidebar-items="sidebarItems", :logo-link="logoLink")
       .container
         router-view
@@ -25,6 +25,25 @@ export default {
   },
   data() {
     return {
+      menuItems: [
+        {
+          icon: 'account_circle',
+          label: 'Profile',
+          action: () => {}
+        },
+        {
+          icon: 'exit_to_app',
+          label: 'Fly away',
+          action: () => {
+            this.$store.storeAuth.dispatch('logout')
+                .then(data => {
+                    data.subscribe(() => {
+                        this.$router.push('login');
+                    });
+                });
+          }
+        }
+      ],
       sidebarItems: [
         {
           icon: 'fa-address-book-o',
