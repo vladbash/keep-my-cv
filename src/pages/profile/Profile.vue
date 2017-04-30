@@ -1,14 +1,19 @@
-<template lang="pug"></template>
+<template lang="pug">
+    div
+        h1 Test
+</template>
 
 <script>
     export default {
         name: 'profile',
         data() {
-            return {};
+            return {
+
+            };
         }
     }
 </script>
 
-<style lang="pug">
+<style lang="stylus">
     
 </style>

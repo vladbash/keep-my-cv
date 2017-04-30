@@ -31,7 +31,9 @@ export default {
         {
           icon: 'account_circle',
           label: 'Profile',
-          action: () => {}
+          action: () => {
+            this.$router.push('profile');
+          }
         },
         {
           icon: 'exit_to_app',
