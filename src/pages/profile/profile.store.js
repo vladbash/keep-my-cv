@@ -25,6 +25,7 @@ let profileStore = new Vuex.Store({
         },
         [GET_SUCCESS](state, profile) {
             state.pending = false;
+            profile.avatar = `${API_ROUTES.static}${profile.avatar}`;
             Vue.set(state, 'profile', profile);
         },
         [UPDATE](state) {

@@ -1,7 +1,7 @@
 <template lang="pug">
   #app
     .auth-app(v-if="isLoggedIn")
-      app-header(:menu-items="menuItems", :profile="profile")
+      app-header(:menu-items="menuItems", :profile="profile", :profile-link="profileLink")
       app-sidebar(:sidebar-items="sidebarItems", :logo-link="logoLink")
       .container
         router-view
@@ -27,6 +27,7 @@ export default {
   },
   data() {
     return {
+      profileLink: 'profile',
       menuItems: [
         {
           icon: 'account_circle',
@@ -52,14 +53,14 @@ export default {
         {
           icon: 'fa-address-book-o',
           color: '#fd5c70',
-          tooltip: 'Contacts',
-          link: '/dashboard'
+          tooltip: 'Candidates',
+          link: '/candidates'
         },
         {
           icon: 'fa-paper-plane-o',
           color: '#fd63a3',
-          tooltip: 'Helper',
-          link: '/dashboard'
+          tooltip: 'Vacancies',
+          link: '/vacancies'
         },
         {
           icon: 'fa-envelope-o',

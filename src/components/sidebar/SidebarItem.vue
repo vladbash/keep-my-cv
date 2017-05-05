@@ -22,11 +22,11 @@
 </script>
 
 <style lang="stylus" scoped>
-    .item
-        border-left-width: 5px
-        border-left-style: hidden
-        cursor: pointer
-        &:hover
-            border-radius: 1px
-            border-left-style: outset
+.item
+    border-left-width 5px
+    border-left-style hidden
+    cursor pointer
+    &:hover
+        border-radius 1px
+        border-left-style outset
 </style>

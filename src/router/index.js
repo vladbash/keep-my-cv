@@ -4,6 +4,8 @@ import authStore from '../pages/auth/auth.store';
 const Login = resolve => require(['@/pages/auth/auth.vue'], resolve);
 const Dashboard = resolve => require(['@/pages/dashboard/Dashboard.vue'], resolve);
 const Profile = resolve => require(['@/pages/profile/Profile.vue'], resolve);
+const Candiates = resolve => require(['@/pages/candidates/Candidates.vue'], resolve);
+const Vacancies = resolve => require(['@/pages/vacancies/Vacancies.vue'], resolve);
 
 Vue.use(Router);
 
@@ -27,6 +29,20 @@ let router = new Router({
     {
       path: '/profile',
       component: Profile,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/candidates',
+      component: Candiates,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/vacancies',
+      component: Vacancies,
       meta: {
         auth: true
       }

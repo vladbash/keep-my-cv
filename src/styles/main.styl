@@ -4,17 +4,18 @@
 @import "constants.styl"
 
 body
-    background-color: $color1
-    font-family: Roboto
-    margin: 0
-    padding: 0
-    height: 100vh
+    background-color #F8F8F8
+    font-family Roboto
+    margin 0
+    padding 0
+    height 100vh
 
 .container
     padding-top: 'calc(12px + %s)' % $header_heigth
+    padding-left: $sidebar__width
 
 .submit-block
-    width: 100%
+    width 100%
     .submit
-        display: block
-        margin: auto
+        display block
+        margin auto

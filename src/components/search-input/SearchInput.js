@@ -1,3 +1,11 @@
+import { mixin as focusMixin }  from 'vue-focus';
+
 export default {
-    name: 'search-input'
+    mixins: [ focusMixin ],
+    name: 'search-input',
+    data() {
+        return {
+            focused: false
+        };
+    }
 }
